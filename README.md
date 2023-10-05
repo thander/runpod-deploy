@@ -1,1 +1,1 @@
-# runpod deploy pod with extensions and models
+runpod deploy pod with extensions and models
