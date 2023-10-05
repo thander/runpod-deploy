@@ -7,6 +7,8 @@ rsync --remove-source-files -rlptDu --ignore-existing /venv/ /workspace/venv/
 echo \"**** load models ****\"
 
 wget -q https://civitai.com/api/download/models/130072 -O /sd-models/realisticVisionV51.safetensors;
+wget -q 'https://civitai.com/api/download/models/132760?type=Model&format=SafeTensor&size=pruned&fp=fp16' -O /sd-models/absolutereality.safetensors;
+
 
 echo \"**** syncing stable diffusion to workspace, please wait ****\"
 rsync --remove-source-files -rlptDu --ignore-existing /stable-diffusion-webui/ /workspace/stable-diffusion-webui/
@@ -17,9 +19,10 @@ echo \"**** load extensions and weights ****\"
 
 sed -i 's/--xformers//' /workspace/stable-diffusion-webui/webui-user.sh;
 git clone https://github.com/continue-revolution/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff;
-wget https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v15_v2.ckpt https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v14.ckpt;
+wget https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v15_v2.ckpt https://huggingface.co/CiaraRowles/TemporalDiff/resolve/main/temporaldiff-v1-animatediff.ckpt;
 mv /workspace/mm_sd_v15_v2.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
-mv /workspace/mm_sd_v14.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
+mv /workspace/temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
+
 cd /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet;
 git pull;
 
@@ -42,6 +45,7 @@ fi
 # git clone https://github.com/continue-revolution/sd-webui-segment-anything  /workspace/stable-diffusion-webui/extensions/sd-webui-segment-anything;
 # mv /workspace/sam_vit_h_4b8939.pth /workspace/stable-diffusion-webui/extensions/sd-webui-segment-anything/models/sam/;
 # wget -q https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth;
+
 
 
 Negative: (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4), text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck
