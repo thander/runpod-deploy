@@ -10,11 +10,14 @@ rsync --remove-source-files -rlptDu --ignore-existing /venv/ /workspace/venv/
 
 echo \"**** load models ****\"
 
-wget -q https://civitai.com/api/download/models/130072 -O /sd-models/realisticVisionV51.safetensors;
-wget -q https://civitai.com/api/download/models/132760 -O /sd-models/absolutereality.safetensors;
+if [ ! -d /workspace/stable-diffusion-webui ]; then
+  wget -q https://civitai.com/api/download/models/130072 -O /sd-models/realisticVisionV51.safetensors;
+  wget -q https://civitai.com/api/download/models/132760 -O /sd-models/absolutereality.safetensors;
 
-wget -q https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.pth -O /cn-models/control_v11f1e_sd15_tile.pth
-wget -q https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.yaml -O /cn-models/control_v11f1e_sd15_tile.yaml
+  wget -q https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.pth -O /cn-models/control_v11f1e_sd15_tile.pth
+  wget -q https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.yaml -O /cn-models/control_v11f1e_sd15_tile.yaml
+fi
+
 echo \"**** syncing stable diffusion to workspace, please wait ****\"
 rsync --remove-source-files -rlptDu --ignore-existing /stable-diffusion-webui/ /workspace/stable-diffusion-webui/
 ln -s /sd-models/* /workspace/stable-diffusion-webui/models/Stable-diffusion/
@@ -22,6 +25,7 @@ ln -s /cn-models/* /workspace/stable-diffusion-webui/extensions/sd-webui-control
 
 echo \"**** load extensions and weights ****\"
 
+if [ ! -f /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/mm_sd_v15_v2.ckpt ]; then
 sed -i 's/--xformers//' /workspace/stable-diffusion-webui/webui-user.sh;
 git clone https://github.com/continue-revolution/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff;
 wget https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v15_v2.ckpt https://huggingface.co/CiaraRowles/TemporalDiff/resolve/main/temporaldiff-v1-animatediff.ckpt;
@@ -30,14 +34,15 @@ mv /workspace/temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui
 
 cd /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet;
 git pull;
+fi
 
 if [[ $RUNPOD_STOP_AUTO ]]
 then
-    echo \"Skipping auto-start of webui\"
+  echo \"Skipping auto-start of webui\"
 else
-    echo \"Started webui through relauncher script\"
-    cd /workspace/stable-diffusion-webui
-    python relauncher.py &
+  echo \"Started webui through relauncher script\"
+  cd /workspace/stable-diffusion-webui
+  python relauncher.py &
 fi
 
 # wget -q https://civitai.com/api/download/models/130090 -O /sd-models/realisticVisionV51inpaint.safetensors;
