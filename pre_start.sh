@@ -34,7 +34,6 @@ else
     cd /workspace/stable-diffusion-webui
     python relauncher.py &
 fi
-/start.sh;"
 
 # wget -q https://civitai.com/api/download/models/130090 -O /sd-models/realisticVisionV51inpaint.safetensors;
 # cd /workspace/stable-diffusion-webui;
