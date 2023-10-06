@@ -1,4 +1,9 @@
-# insert to template (docker command)
+# download to runpod pod to path: '/'. Docker command in template:
+
+# bash -c '
+# wget https://github.com/thander/runpod-deploy/blob/main/pre_start.sh -O /pre_start.sh;
+# /start.sh;
+# ';
 
 echo \"**** syncing venv to workspace, please wait. This could take a while on first startup! ****\"
 rsync --remove-source-files -rlptDu --ignore-existing /venv/ /workspace/venv/
