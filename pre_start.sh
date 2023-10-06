@@ -1,6 +1,5 @@
 # insert to template (docker command)
 
-bash -c "echo '
 echo \"**** syncing venv to workspace, please wait. This could take a while on first startup! ****\"
 rsync --remove-source-files -rlptDu --ignore-existing /venv/ /workspace/venv/
 
@@ -35,7 +34,6 @@ else
     cd /workspace/stable-diffusion-webui
     python relauncher.py &
 fi
-' > /pre_start.sh;
 /start.sh;"
 
 # wget -q https://civitai.com/api/download/models/130090 -O /sd-models/realisticVisionV51inpaint.safetensors;
