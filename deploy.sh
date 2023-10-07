@@ -7,7 +7,7 @@ POD_ID=`
 	--volumeSize 75 \
 	--containerDiskSize 30 \
 	--name ease \
-	--gpuType 'NVIDIA RTX A4500' \
+	--gpuType 'NVIDIA RTX A4000' \
 	--ports '8888/http,3001/http,22/tcp' \
 `;
 

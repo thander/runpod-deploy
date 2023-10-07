@@ -13,7 +13,8 @@ echo \"**** load models ****\"
 if [ ! -d /workspace/stable-diffusion-webui ]; then
   wget -q https://civitai.com/api/download/models/130072 -O /sd-models/realisticVisionV51.safetensors;
   wget -q https://civitai.com/api/download/models/132760 -O /sd-models/absolutereality.safetensors;
-
+  
+  wget -q https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.bin -O /cn-models/ip-adapter-plus-face_sd15.pth
   wget -q https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.pth -O /cn-models/control_v11f1e_sd15_tile.pth
   wget -q https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.yaml -O /cn-models/control_v11f1e_sd15_tile.yaml
   wget -q https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/ip-adapter_sd15_plus.pth -O /cn-models/ip-adapter_sd15_plus.pth
@@ -35,6 +36,7 @@ cd /workspace/stable-diffusion-webui;
 source /workspace/venv/bin/activate;
 PYTHONPATH=/workspace/stable-diffusion-webui python extensions/sd-webui-reactor/install.py;
 wget https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v15_v2.ckpt https://huggingface.co/CiaraRowles/TemporalDiff/resolve/main/temporaldiff-v1-animatediff.ckpt;
+
 mv mm_sd_v15_v2.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
 mv temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
 
