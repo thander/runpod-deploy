@@ -46,11 +46,15 @@ if [[ $RUNPOD_STOP_AUTO ]]
 then
   echo \"Skipping auto-start of webui\"
 else
+  cd /
+  wget https://raw.githubusercontent.com/thander/runpod-deploy/main/handler.py
+  wget https://raw.githubusercontent.com/thander/runpod-deploy/main/requirements.txt
+  pip install -r requirements.txt
+  nohup python -u handler.py >/dev/null 2>&1
+
   echo \"Started webui through relauncher script\"
   cd /workspace/stable-diffusion-webui
-  wget https://raw.githubusercontent.com/thander/runpod-deploy/main/handler.py
   python relauncher.py &
-  python -u handler.py &
 fi
 
 # wget -q https://civitai.com/api/download/models/130090 -O /sd-models/realisticVisionV51inpaint.safetensors;
