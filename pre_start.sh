@@ -11,13 +11,13 @@ rsync --remove-source-files -rlptDu --ignore-existing /venv/ /workspace/venv/
 echo \"**** load models ****\"
 
 if [ ! -d /workspace/stable-diffusion-webui ]; then
-  wget -q https://civitai.com/api/download/models/130072 -O /sd-models/realisticVisionV51.safetensors;
-  # wget -q https://civitai.com/api/download/models/132760 -O /sd-models/absolutereality.safetensors;
+  wget https://civitai.com/api/download/models/130072 -O /sd-models/realisticVisionV51.safetensors;
+  # wget https://civitai.com/api/download/models/132760 -O /sd-models/absolutereality.safetensors;
 
-  wget -q https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.bin -O /cn-models/ip-adapter-plus-face_sd15.pth
-  # wget -q https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.pth -O /cn-models/control_v11f1e_sd15_tile.pth
-  # wget -q https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.yaml -O /cn-models/control_v11f1e_sd15_tile.yaml
-  wget -q https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/ip-adapter_sd15_plus.pth -O /cn-models/ip-adapter_sd15_plus.pth
+  wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.bin -O /cn-models/ip-adapter-plus-face_sd15.pth
+  # wget https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.pth -O /cn-models/control_v11f1e_sd15_tile.pth
+  # wget https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.yaml -O /cn-models/control_v11f1e_sd15_tile.yaml
+  wget https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/ip-adapter_sd15_plus.pth -O /cn-models/ip-adapter_sd15_plus.pth
 fi
 
 echo \"**** syncing stable diffusion to workspace, please wait ****\"
