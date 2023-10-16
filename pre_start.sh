@@ -12,11 +12,11 @@ echo \"**** load models ****\"
 
 if [ ! -d /workspace/stable-diffusion-webui ]; then
   wget -q https://civitai.com/api/download/models/130072 -O /sd-models/realisticVisionV51.safetensors;
-  wget -q https://civitai.com/api/download/models/132760 -O /sd-models/absolutereality.safetensors;
-  
+  # wget -q https://civitai.com/api/download/models/132760 -O /sd-models/absolutereality.safetensors;
+
   wget -q https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.bin -O /cn-models/ip-adapter-plus-face_sd15.pth
-  wget -q https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.pth -O /cn-models/control_v11f1e_sd15_tile.pth
-  wget -q https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.yaml -O /cn-models/control_v11f1e_sd15_tile.yaml
+  # wget -q https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.pth -O /cn-models/control_v11f1e_sd15_tile.pth
+  # wget -q https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.yaml -O /cn-models/control_v11f1e_sd15_tile.yaml
   wget -q https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/ip-adapter_sd15_plus.pth -O /cn-models/ip-adapter_sd15_plus.pth
 fi
 
@@ -35,9 +35,7 @@ git clone https://github.com/Gourieff/sd-webui-reactor /workspace/stable-diffusi
 cd /workspace/stable-diffusion-webui;
 source /workspace/venv/bin/activate;
 PYTHONPATH=/workspace/stable-diffusion-webui python extensions/sd-webui-reactor/install.py;
-wget https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v15_v2.ckpt https://huggingface.co/CiaraRowles/TemporalDiff/resolve/main/temporaldiff-v1-animatediff.ckpt;
-
-mv mm_sd_v15_v2.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
+wget https://huggingface.co/CiaraRowles/TemporalDiff/resolve/main/temporaldiff-v1-animatediff.ckpt;
 mv temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
 
 cd /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet;
@@ -64,10 +62,12 @@ fi
 
 
 
-# Negative: (deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4), text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck
 
 # ➜  100_ease mkdir -p resized && sips *.HEIC -Z 768 --cropToHeightWidth 512 512 --out resized/*.jpg
 
 # ls -v | cat -n | while read n f; do mv -n "$f" "0$n.png"; done 
 
 # runpodctl create pod --templateId '1iohfg19etx' --imageName runpod/stable-diffusion:web-ui-10.2.1 --volumeSize 75 --containerDiskSize 20 --secureCloud --name ease --gpuType 'NVIDIA RTX A4000' --ports '8888/http,3001/http,22/tcp'
+
+
+
