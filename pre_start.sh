@@ -48,7 +48,7 @@ then
 else
   echo \"Started webui through relauncher script\"
   cd /workspace/stable-diffusion-webui
-  wget 
+  wget https://raw.githubusercontent.com/thander/runpod-deploy/main/handler.py
   python relauncher.py &
   python -u handler.py &
 fi
