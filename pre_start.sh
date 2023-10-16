@@ -28,7 +28,7 @@ ln -s /cn-models/* /workspace/stable-diffusion-webui/extensions/sd-webui-control
 echo \"**** load extensions and weights ****\"
 
 if [ ! -f /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/mm_sd_v15_v2.ckpt ]; then
-sed -i 's/--xformers//' /workspace/stable-diffusion-webui/webui-user.sh;
+sed -i 's/--xformers/--api/' /workspace/stable-diffusion-webui/webui-user.sh;
 git clone https://github.com/continue-revolution/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff;
 git clone https://github.com/Gourieff/sd-webui-reactor /workspace/stable-diffusion-webui/extensions/sd-webui-reactor;
 
@@ -48,7 +48,9 @@ then
 else
   echo \"Started webui through relauncher script\"
   cd /workspace/stable-diffusion-webui
+  wget 
   python relauncher.py &
+  python -u handler.py &
 fi
 
 # wget -q https://civitai.com/api/download/models/130090 -O /sd-models/realisticVisionV51inpaint.safetensors;
