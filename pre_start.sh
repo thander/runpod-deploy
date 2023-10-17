@@ -10,8 +10,14 @@ rsync --remove-source-files -rlptDu --ignore-existing /venv/ /workspace/venv/
 
 echo \"**** load models ****\"
 
+mv /workspace/models/
+
 echo \"**** syncing stable diffusion to workspace, please wait ****\"
 rsync --remove-source-files -rlptDu --ignore-existing /stable-diffusion-webui/ /workspace/stable-diffusion-webui/
+
+ln -s /workspace/models/* /workspace/stable-diffusion-webui/models/Stable-diffusion/
+ln -s /workspace/cnmodels/* /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet/models/
+
 ln -s /sd-models/* /workspace/stable-diffusion-webui/models/Stable-diffusion/
 ln -s /cn-models/* /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet/models/
 
@@ -25,7 +31,8 @@ git clone https://github.com/Gourieff/sd-webui-reactor /workspace/stable-diffusi
 cd /workspace/stable-diffusion-webui;
 source /workspace/venv/bin/activate;
 PYTHONPATH=/workspace/stable-diffusion-webui python extensions/sd-webui-reactor/install.py;
-mv /sd-models/temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
+
+ln -s /workspace/temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
 
 cd /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet;
 git pull;
