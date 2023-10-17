@@ -10,8 +10,6 @@ rsync --remove-source-files -rlptDu --ignore-existing /venv/ /workspace/venv/
 
 echo \"**** load models ****\"
 
-mv /workspace/models/
-
 echo \"**** syncing stable diffusion to workspace, please wait ****\"
 rsync --remove-source-files -rlptDu --ignore-existing /stable-diffusion-webui/ /workspace/stable-diffusion-webui/
 
@@ -23,13 +21,13 @@ ln -s /cn-models/* /workspace/stable-diffusion-webui/extensions/sd-webui-control
 
 echo \"**** load extensions and weights ****\"
 
+source /workspace/venv/bin/activate;
 if [ ! -f /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/temporaldiff-v1-animatediff.ckpt ]; then
 sed -i 's/--xformers/--api/' /workspace/stable-diffusion-webui/webui-user.sh;
 git clone https://github.com/continue-revolution/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff;
 git clone https://github.com/Gourieff/sd-webui-reactor /workspace/stable-diffusion-webui/extensions/sd-webui-reactor;
 
 cd /workspace/stable-diffusion-webui;
-source /workspace/venv/bin/activate;
 PYTHONPATH=/workspace/stable-diffusion-webui python extensions/sd-webui-reactor/install.py;
 
 ln -s /workspace/temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
