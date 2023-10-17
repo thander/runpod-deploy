@@ -41,15 +41,14 @@ then
   echo \"Skipping auto-start of webui\"
 else
   cd /
-  wget https://raw.githubusercontent.com/thander/runpod-deploy/main/handler.py
-
   mkdir schemas 
   cd schemas
   wget https://raw.githubusercontent.com/thander/runpod-deploy/main/schemas/api.py
   wget https://raw.githubusercontent.com/thander/runpod-deploy/main/schemas/img2img.py
   wget https://raw.githubusercontent.com/thander/runpod-deploy/main/schemas/options.py
   wget https://raw.githubusercontent.com/thander/runpod-deploy/main/schemas/txt2img.py
-
+  cd /
+  wget https://raw.githubusercontent.com/thander/runpod-deploy/main/handler.py
   wget https://raw.githubusercontent.com/thander/runpod-deploy/main/requirements.txt
   pip install -r requirements.txt
   nohup python -u handler.py >/dev/null 2>&1
