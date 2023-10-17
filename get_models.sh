@@ -6,3 +6,6 @@ wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-f
 wget https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.pth -O /workspace/cnmodels/control_v11f1e_sd15_tile.pth
 wget https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.yaml -O /workspace/cnmodels/control_v11f1e_sd15_tile.yaml
 wget https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/ip-adapter_sd15_plus.pth -O /workspace/cnmodels/ip-adapter_sd15_plus.pth
+
+
+mkdir 
