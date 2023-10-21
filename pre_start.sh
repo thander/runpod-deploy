@@ -30,7 +30,7 @@ if [[ $RUNPOD_STOP_AUTO ]]
 then
   echo \"Skipping auto-start of webui\"
 else
-  cd /workspace/app
+  cd /runpod-volume/app
   git pull 
   nohup python -u handler.py >/dev/null 2>&1
 
