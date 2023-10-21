@@ -7,7 +7,7 @@
 
 echo \"**** syncing venv to workspace, please wait. This could take a while on first startup! ****\"
 # rsync --remove-source-files -rlptDu --ignore-existing /runpod-volume/venv/ /workspace/venv/
-cp -r /runpod-volume/venv /workspace/;
+ln -s /runpod-volume/venv /workspace/
 
 echo \"**** load models ****\"
 
