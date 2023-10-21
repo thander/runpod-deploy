@@ -32,7 +32,7 @@ then
 else
   cd /runpod-volume/app
   git pull 
-  nohup python -u handler.py >/dev/null 2>&1
+  nohup python -u handler.py &
 
   echo \"Started webui through relauncher script\"
   cd /workspace/stable-diffusion-webui
