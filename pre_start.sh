@@ -13,8 +13,8 @@ echo \"**** load models ****\"
 echo \"**** syncing stable diffusion to workspace, please wait ****\"
 rsync --remove-source-files -rlptDu --ignore-existing /stable-diffusion-webui/ /workspace/stable-diffusion-webui/
 
-ln -s /workspace/models/* /workspace/stable-diffusion-webui/models/Stable-diffusion/
-ln -s /workspace/cnmodels/* /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet/models/
+ln -s /runpod-volume/models/* /workspace/stable-diffusion-webui/models/Stable-diffusion/
+ln -s /runpod-volume/cnmodels/* /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet/models/
 
 ln -s /sd-models/* /workspace/stable-diffusion-webui/models/Stable-diffusion/
 ln -s /cn-models/* /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet/models/
@@ -22,9 +22,9 @@ ln -s /cn-models/* /workspace/stable-diffusion-webui/extensions/sd-webui-control
 echo \"**** load extensions and weights ****\"
 
 sed -i 's/--xformers/--api/' /workspace/stable-diffusion-webui/webui-user.sh;
-cp -R -T /workspace/extensions/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/;
-cp -R -T /workspace/extensions/sd-webui-reactor /workspace/stable-diffusion-webui/extensions/;
-ln -s /workspace/temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
+cp -R -T /runpod-volume/extensions/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/;
+cp -R -T /runpod-volume/extensions/sd-webui-reactor /workspace/stable-diffusion-webui/extensions/;
+ln -s /runpod-volume/temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
 
 if [[ $RUNPOD_STOP_AUTO ]]
 then
