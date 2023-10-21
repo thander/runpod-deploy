@@ -22,8 +22,8 @@ ln -s /cn-models/* /workspace/stable-diffusion-webui/extensions/sd-webui-control
 echo \"**** load extensions and weights ****\"
 
 sed -i 's/--xformers/--api/' /workspace/stable-diffusion-webui/webui-user.sh;
-mv -f /workspace/extensions/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/;
-mv -f /workspace/extensions/sd-webui-reactor /workspace/stable-diffusion-webui/extensions/;
+cp -R -T /workspace/extensions/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/;
+cp -R -T /workspace/extensions/sd-webui-reactor /workspace/stable-diffusion-webui/extensions/;
 ln -s /workspace/temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
 
 if [[ $RUNPOD_STOP_AUTO ]]
