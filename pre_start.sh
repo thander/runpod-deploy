@@ -21,36 +21,17 @@ ln -s /cn-models/* /workspace/stable-diffusion-webui/extensions/sd-webui-control
 
 echo \"**** load extensions and weights ****\"
 
-source /workspace/venv/bin/activate;
-if [ ! -f /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/temporaldiff-v1-animatediff.ckpt ]; then
 sed -i 's/--xformers/--api/' /workspace/stable-diffusion-webui/webui-user.sh;
-git clone https://github.com/continue-revolution/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff;
-git clone https://github.com/Gourieff/sd-webui-reactor /workspace/stable-diffusion-webui/extensions/sd-webui-reactor;
-
-cd /workspace/stable-diffusion-webui;
-PYTHONPATH=/workspace/stable-diffusion-webui python extensions/sd-webui-reactor/install.py;
-
+mv -f /workspace/extensions/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/;
+mv -f /workspace/extensions/sd-webui-reactor /workspace/stable-diffusion-webui/extensions/;
 ln -s /workspace/temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
-
-cd /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet;
-git pull;
-fi
 
 if [[ $RUNPOD_STOP_AUTO ]]
 then
   echo \"Skipping auto-start of webui\"
 else
-  cd /
-  mkdir schemas 
-  cd schemas
-  wget https://raw.githubusercontent.com/thander/runpod-deploy/main/schemas/api.py
-  wget https://raw.githubusercontent.com/thander/runpod-deploy/main/schemas/img2img.py
-  wget https://raw.githubusercontent.com/thander/runpod-deploy/main/schemas/options.py
-  wget https://raw.githubusercontent.com/thander/runpod-deploy/main/schemas/txt2img.py
-  cd /
-  wget https://raw.githubusercontent.com/thander/runpod-deploy/main/handler.py
-  wget https://raw.githubusercontent.com/thander/runpod-deploy/main/requirements.txt
-  pip install -r requirements.txt
+  cd /workspace/app
+  git pull 
   nohup python -u handler.py >/dev/null 2>&1
 
   echo \"Started webui through relauncher script\"
