@@ -57,6 +57,7 @@ def send_post_request(endpoint, payload):
 
 
 def validate_api(event):
+    print(event);
     if 'api' not in event['input']:
         return {
             'errors': '"api" is a required field in the "input" payload'
