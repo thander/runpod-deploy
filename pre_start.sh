@@ -7,6 +7,7 @@
 
 echo \"**** syncing venv to workspace, please wait. This could take a while on first startup! ****\"
 # rsync --remove-source-files -rlptDu --ignore-existing /runpod-volume/venv/ /workspace/venv/
+cp -r /runpod-volume/venv /workspace/;
 
 echo \"**** load models ****\"
 
@@ -26,7 +27,7 @@ cp -r /runpod-volume/extensions/sd-webui-animatediff /workspace/stable-diffusion
 cp -r /runpod-volume/extensions/sd-webui-reactor /workspace/stable-diffusion-webui/extensions/;
 ln -s /runpod-volume/temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
 
-source /runpod-volume/venv/bin/activate;
+# source /runpod-volume/venv/bin/activate;
 
 if [[ $RUNPOD_STOP_AUTO ]]
 then
