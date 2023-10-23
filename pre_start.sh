@@ -30,7 +30,7 @@ then
   echo \"Skipping auto-start of webui\"
 else
   cd /runpod-volume/app
-  git pull 
+  git pull --rebase
   nohup python -u handler.py &
 
   echo \"Started webui through relauncher script\"
