@@ -97,6 +97,8 @@ def pic_replace(payload):
   sam_options = payload[0]
   response = send_post_request('sam/sam-predict', sam_options)
   result = response.json()
+  logger.log(result, 'INFO')
+
   mask_string = result['masks'][2]
 
   # draw in mask
