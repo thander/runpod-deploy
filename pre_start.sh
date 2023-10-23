@@ -16,7 +16,7 @@ rsync --remove-source-files -rlptDu --ignore-existing /stable-diffusion-webui/ /
 
 echo \"**** load extensions and weights ****\"
 
-if ! grep -q "--xformers --api --nowebui" /workspace/stable-diffusion-webui/webui-user.sh; then
+if ! grep -q -- "--xformers --api --nowebui" /workspace/stable-diffusion-webui/webui-user.sh; then
   sed -i 's/--xformers/--xformers --api --nowebui/' /workspace/stable-diffusion-webui/webui-user.sh;
 fi
 
