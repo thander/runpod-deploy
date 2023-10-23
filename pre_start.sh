@@ -35,7 +35,7 @@ else
   cd /runpod-volume/app
   rm -rf schemas/__pycache__
   git pull
-  nohup python -u handler.py &
+  # nohup python -u handler.py &
 
   echo \"Started webui through relauncher script\"
   cd /workspace/stable-diffusion-webui
