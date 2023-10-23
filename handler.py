@@ -143,6 +143,7 @@ def handler(event):
             response = pic_replace(payload)
 
     except Exception as e:
+        logger.log(e, 'INFO')
         return {
             'error': str(e)
         }
