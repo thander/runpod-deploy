@@ -16,7 +16,10 @@ rsync --remove-source-files -rlptDu --ignore-existing /stable-diffusion-webui/ /
 
 echo \"**** load extensions and weights ****\"
 
-sed -i 's/--xformers/--xformers --api --nowebui/' /workspace/stable-diffusion-webui/webui-user.sh;
+if ! grep -q "--xformers --api --nowebui" /workspace/stable-diffusion-webui/webui-user.sh; then
+  sed -i 's/--xformers/--xformers --api --nowebui/' /workspace/stable-diffusion-webui/webui-user.sh;
+fi
+
 cp -r /runpod-volume/extensions/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/;
 cp -r /runpod-volume/extensions/sd-webui-reactor /workspace/stable-diffusion-webui/extensions/;
 cp -r /runpod-volume/extensions/sd-webui-controlnet /workspace/stable-diffusion-webui/extensions/;
@@ -32,14 +35,12 @@ else
   cd /runpod-volume/app
   rm -rf schemas/__pycache__
   git pull
+  nohup python -u handler.py &
 
   echo \"Started webui through relauncher script\"
   cd /workspace/stable-diffusion-webui
 
   python relauncher.py &
-  sleep 20
-  cd /runpod-volume/app
-  nohup python -u handler.py &
 fi
 
 # wget -q https://civitai.com/api/download/models/130090 -O /sd-models/realisticVisionV51inpaint.safetensors;
