@@ -15,6 +15,7 @@ TIMEOUT = 600
 session = requests.Session()
 retries = Retry(total=10, backoff_factor=0.1, status_forcelist=[502, 503, 504])
 session.mount('http://', HTTPAdapter(max_retries=retries))
+session.headers.update({"Content-Type": "application/json", 'Accept': 'application/json'})
 logger = RunPodLogger()
 
 
@@ -57,7 +58,6 @@ def send_post_request(endpoint, payload):
 
 
 def validate_api(event):
-    print(event);
     if 'api' not in event['input']:
         return {
             'errors': '"api" is a required field in the "input" payload'
@@ -91,6 +91,24 @@ def validate_payload(event):
     return endpoint, event['input']['api']['method'], validated_input
 
 
+
+def pic_replace(payload):
+  # make auto sam by prompt
+  sam_options = payload[0]
+  response = send_post_request('sam/sam-predict', sam_options)
+  result = response.json()
+  mask_string = result['masks'][2]
+
+  # draw in mask
+  input_image = payload[0]['input_image']
+  img2img_inpaint_options = payload[1]  
+  img2img_inpaint_options['mask'] = mask_string
+  img2img_inpaint_options['init_images'] = [input_image]
+  response2 = send_post_request('sdapi/v1/img2img', img2img_inpaint_options)
+
+  return response2
+
+
 # ---------------------------------------------------------------------------- #
 #                                RunPod Handler                                #
 # ---------------------------------------------------------------------------- #
@@ -121,6 +139,9 @@ def handler(event):
             response = send_get_request(endpoint)
         elif method == 'POST':
             response = send_post_request(endpoint, payload)
+        elif method == 'pic_replace':
+            response = pic_replace(payload)
+
     except Exception as e:
         return {
             'error': str(e)

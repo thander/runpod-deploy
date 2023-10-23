@@ -22,7 +22,7 @@ ln -s /runpod-volume/cnmodels/* /workspace/stable-diffusion-webui/extensions/sd-
 
 echo \"**** load extensions and weights ****\"
 
-sed -i 's/--xformers/--api/' /workspace/stable-diffusion-webui/webui-user.sh;
+sed -i 's/--xformers/--xformers --api/' /workspace/stable-diffusion-webui/webui-user.sh;
 cp -r /runpod-volume/extensions/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/;
 cp -r /runpod-volume/extensions/sd-webui-reactor /workspace/stable-diffusion-webui/extensions/;
 ln -s /runpod-volume/temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
