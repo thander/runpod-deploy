@@ -32,12 +32,13 @@ else
   cd /runpod-volume/app
   rm -rf schemas/__pycache__
   git pull
-  nohup python -u handler.py &
 
   echo \"Started webui through relauncher script\"
   cd /workspace/stable-diffusion-webui
 
   python relauncher.py &
+  sleep 20
+  nohup python -u handler.py &
 fi
 
 # wget -q https://civitai.com/api/download/models/130090 -O /sd-models/realisticVisionV51inpaint.safetensors;
