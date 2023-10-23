@@ -37,16 +37,7 @@ else
   echo \"Started webui through relauncher script\"
   cd /workspace/stable-diffusion-webui
 
-  python relauncher.py > log-file &
-  if timeout 5 tail -f log-file | grep ""
-  then
-    # grep found something before tail was killed
-    bash-script-1
-  else
-    # tail was killed before grep found anything
-    bash-script-2
-  fi
-  
+  python relauncher.py &
 fi
 
 # wget -q https://civitai.com/api/download/models/130090 -O /sd-models/realisticVisionV51inpaint.safetensors;
