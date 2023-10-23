@@ -38,6 +38,7 @@ else
 
   python relauncher.py &
   sleep 20
+  cd /runpod-volume/app
   nohup python -u handler.py &
 fi
 
