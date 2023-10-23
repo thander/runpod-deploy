@@ -20,13 +20,14 @@ if ! grep -q "--xformers --api --nowebui" /workspace/stable-diffusion-webui/webu
   sed -i 's/--xformers/--xformers --api --nowebui/' /workspace/stable-diffusion-webui/webui-user.sh;
 fi
 
-cp -r /runpod-volume/extensions/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/;
-cp -r /runpod-volume/extensions/sd-webui-reactor /workspace/stable-diffusion-webui/extensions/;
-cp -r /runpod-volume/extensions/sd-webui-controlnet /workspace/stable-diffusion-webui/extensions/;
-ln -s /runpod-volume/temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
+# cp -r /runpod-volume/extensions/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/;
+# cp -r /runpod-volume/extensions/sd-webui-reactor /workspace/stable-diffusion-webui/extensions/;
+# cp -r /runpod-volume/extensions/sd-webui-controlnet /workspace/stable-diffusion-webui/extensions/;
+cp -r /runpod-volume/extensions/sd-webui-segment-anything /workspace/stable-diffusion-webui/extensions/;
+# ln -s /runpod-volume/temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
 
 ln -s /runpod-volume/models/* /workspace/stable-diffusion-webui/models/Stable-diffusion/
-ln -s /runpod-volume/cnmodels/* /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet/models/
+# ln -s /runpod-volume/cnmodels/* /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet/models/
 
 if [[ $RUNPOD_STOP_AUTO ]]
 then
@@ -43,7 +44,7 @@ else
   python relauncher.py &
 fi
 
-# wget -q https://civitai.com/api/download/models/130090 -O /sd-models/realisticVisionV51inpaint.safetensors;
+# wget https://civitai.com/api/download/models/130090 -O /runpod-volume/models/realisticVisionV51inpaint.safetensors;
 # cd /workspace/stable-diffusion-webui;
 
 # PYTHONPATH=/workspace/stable-diffusion-webui python extensions/sd-webui-segment-anything/install.py;
