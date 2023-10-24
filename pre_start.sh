@@ -32,16 +32,16 @@ ln -s /runpod-volume/models/* /workspace/stable-diffusion-webui/models/Stable-di
 if [[ $RUNPOD_STOP_AUTO ]]
 then
   echo \"Skipping auto-start of webui\"
-else
+else  echo \"Started webui through relauncher script\"
+  cd /workspace/stable-diffusion-webui
+ 
+  python relauncher.py > log.log &
+
   cd /runpod-volume/app
   rm -rf schemas/__pycache__
   git pull
+  grep -q 'Model loaded in' <(tail -f /workspace/log.log)
   nohup python -u handler.py &
-
-  echo \"Started webui through relauncher script\"
-  cd /workspace/stable-diffusion-webui
-
-  python relauncher.py &
 fi
 
 # wget https://civitai.com/api/download/models/130090 -O /runpod-volume/models/realisticVisionV51inpaint.safetensors;

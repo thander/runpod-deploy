@@ -10,11 +10,13 @@
 </form>
 <button id="cancel" disabled="true">Cancel job</button>
 <div class="timer" id="timer"></div>
-<img id="result" />
+<div>
+<img id="result" /></div>
 
 <script>
 	var apikey = 'UOM9JEA59ORKWATNUV7WBKZ6LVEXWITF3SLAMZA3'
-	var serverid = 'kwrgc55jxntvqi'
+	var serverid = '4vkyewmpfc1t5p'
+	var resizeTo = 768
 
 	const resizeImage = async (
 	  url,
@@ -93,7 +95,6 @@
 		const url = `https://api.runpod.ai/v2/${serverid}/cancel/${window.currentJobId}`
 		fetch(url, {
 		  method: 'post',
-		  body: JSON.stringify(dataToPost),
 		  mode: 'cors',
 		  headers: new Headers({
 		    'Content-Type': 'application/json',
@@ -163,8 +164,8 @@
 		                "cfg_scale": 7,
 		                "width": 512,
 		                "height": 512,
-		                "restore_faces": true,
-		                "tiling": true,
+		                "restore_faces": false,
+		                "tiling": false,
 		                "do_not_save_samples": false,
 		                "do_not_save_grid": false,
 		                "eta": 0,
@@ -175,10 +176,9 @@
 		                "s_tmin": 0,
 		                "s_noise": 0,
 		                "override_settings": {
-		                  "sd_model_checkpoint": "Realistic_Vision_V5.1-inpainting.ckpt [315595caf9]"
+		                  "sd_model_checkpoint": "realisticVisionV51.safetensors [315595caf9]"
 		                },
 		                "override_settings_restore_afterwards": true,
-		                "refiner_checkpoint": "",
 		                "refiner_switch_at": 0,
 		                "disable_extra_networks": false,
 		                "comments": {},
@@ -212,7 +212,7 @@
 		var file = document.querySelector('input[type="file"]').files[0];
 		getBase64(file).then(async (data) => {
 			let img = await resizeImage(data, {
-			  maxWidth: 768
+			  maxWidth: resizeTo
 			});
 
 			dataToPost.input.payload[0].input_image = img.b64;
@@ -228,12 +228,13 @@
 			.then(response => response.json())
 			.then(json => {
 				document.querySelector('#button').removeAttribute('disabled')
-				document.querySelector('#cancel').removeAttribute('disabled')
-				window.currentJobId = json.id
 				clearInterval(window.currentInterval);
 				
 				if (json.output) {
-					document.getElementById('img').src = `data:image/png;base64,${json.output.images[0]}`
+					document.getElementById('result').src = `data:image/png;base64,${json.output.images[0]}`
+				} else {
+					window.currentJobId = json.id
+					document.querySelector('#cancel').removeAttribute('disabled')
 				}
 			})
 			.catch((e) => {
