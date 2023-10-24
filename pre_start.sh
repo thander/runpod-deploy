@@ -40,7 +40,7 @@ else  echo \"Started webui through relauncher script\"
   cd /runpod-volume/app
   rm -rf schemas/__pycache__
   git pull
-  grep -q 'Model loaded in' <(tail -f /workspace/log.log)
+  grep -q 'Model loaded in' <(tail -f /workspace/stable-diffusion-webui/log.log)
   nohup python -u handler.py &
 fi
 
