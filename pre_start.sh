@@ -22,7 +22,7 @@ fi
 
 # cp -r /runpod-volume/extensions/sd-webui-animatediff /workspace/stable-diffusion-webui/extensions/;
 # cp -r /runpod-volume/extensions/sd-webui-reactor /workspace/stable-diffusion-webui/extensions/;
-# cp -r /runpod-volume/extensions/sd-webui-controlnet /workspace/stable-diffusion-webui/extensions/;
+cp -r /runpod-volume/extensions/sd-webui-controlnet /workspace/stable-diffusion-webui/extensions/;
 cp -r /runpod-volume/extensions/sd-webui-segment-anything /workspace/stable-diffusion-webui/extensions/;
 # ln -s /runpod-volume/temporaldiff-v1-animatediff.ckpt /workspace/stable-diffusion-webui/extensions/sd-webui-animatediff/model/;
 

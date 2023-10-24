@@ -8,4 +8,4 @@ wget https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f
 wget https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/ip-adapter_sd15_plus.pth -O /workspace/cnmodels/ip-adapter_sd15_plus.pth
 
 
-mkdir 
+"https://huggingface.co/ShilongLiu/GroundingDINO/resolve/main/groundingdino_swint_ogc.pth" to /workspace/stable-diffusion-webui/extensions/sd-webui-segment-anything/models/grounding-dino/groundingdino_swint_ogc.pth
