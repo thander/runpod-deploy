@@ -13,7 +13,7 @@ import PIL
 from PIL import Image
 import base64
 
-BASE_URL = 'http://127.0.0.1:7860'
+BASE_URL = 'http://127.0.0.1:3000'
 TIMEOUT = 600
 
 session = requests.Session()

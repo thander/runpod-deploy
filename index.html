@@ -146,7 +146,7 @@
 			}
 		})
 		.catch((e) => {
-			console.error(e)
+			setTimeout(() => { checkStatus(jobId) }, 2000);
 		})
 	}
 
@@ -261,6 +261,7 @@
 			.then(response => response.json())
 			.then(json => {
 				document.querySelector('#button').removeAttribute('disabled')
+				window.currentJobId = json.id
 				
 				if (json.output) {
 					clearInterval(window.currentInterval);
