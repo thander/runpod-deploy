@@ -13,7 +13,7 @@ import PIL
 from PIL import Image
 import base64
 
-BASE_URL = 'http://127.0.0.1:3000'
+BASE_URL = 'http://127.0.0.1:7860'
 TIMEOUT = 600
 
 session = requests.Session()
@@ -108,7 +108,7 @@ def pic_replace(payload):
   # draw in mask
   input_image = payload[0]['input_image']
   
-  imgdata = base64.b64decode(input_image)
+  imgdata = base64.b64decode(mask_string)
   im = Image.open(io.BytesIO(imgdata))
   width, height = im.size
 
@@ -165,7 +165,7 @@ def handler(event):
 
 
 if __name__ == "__main__":
-    wait_for_service(url='http://127.0.0.1:3000/sdapi/v1/sd-models')
+    wait_for_service(url=f'{BASE_URL}/sdapi/v1/sd-models')
     logger.log('Automatic1111 API is ready', 'INFO')
     logger.log('Starting RunPod Serverless...', 'INFO')
     runpod.serverless.start(

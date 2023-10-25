@@ -136,6 +136,7 @@
 			if (json.status.toLowerCase() === 'failed') {
 				clearInterval(window.currentInterval);
 				alert(JSON.stringify(json))
+				return
 			}
 			if (json.output) {
 				clearInterval(window.currentInterval);
