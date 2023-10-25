@@ -133,6 +133,10 @@
 		})
 		.then(response => response.json())
 		.then(json => {
+			if (json.status.toLowerCase() === 'failed') {
+				clearInterval(window.currentInterval);
+				alert(JSON.stringify(json))
+			}
 			if (json.output) {
 				clearInterval(window.currentInterval);
 				document.getElementById('result').src = `data:image/png;base64,${json.output.images[0]}`

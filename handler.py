@@ -11,6 +11,7 @@ from schemas.options import OPTIONS_SCHEMA
 import io
 import PIL
 from PIL import Image
+import base64
 
 BASE_URL = 'http://127.0.0.1:3000'
 TIMEOUT = 600
