@@ -8,6 +8,9 @@ from schemas.api import API_SCHEMA
 from schemas.img2img import IMG2IMG_SCHEMA
 from schemas.txt2img import TXT2IMG_SCHEMA
 from schemas.options import OPTIONS_SCHEMA
+import io
+import PIL
+from PIL import Image
 
 BASE_URL = 'http://127.0.0.1:3000'
 TIMEOUT = 600
@@ -103,9 +106,16 @@ def pic_replace(payload):
 
   # draw in mask
   input_image = payload[0]['input_image']
+  
+  imgdata = base64.b64decode(input_image)
+  im = Image.open(io.BytesIO(imgdata))
+  width, height = im.size
+
   img2img_inpaint_options = payload[1]  
   img2img_inpaint_options['mask'] = mask_string
   img2img_inpaint_options['init_images'] = [input_image]
+  img2img_inpaint_options['width'] = width
+  img2img_inpaint_options['height'] = height
   response2 = send_post_request('sdapi/v1/img2img', img2img_inpaint_options)
 
   return response2
