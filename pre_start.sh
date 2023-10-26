@@ -34,7 +34,7 @@ then
   echo \"Skipping auto-start of webui\"
 else  echo \"Started webui through relauncher script\"
   cd /workspace/stable-diffusion-webui
- 
+  rm log.log
   python relauncher.py > log.log &
 
   cd /runpod-volume/app
