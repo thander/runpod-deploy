@@ -15,10 +15,12 @@ wget https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/ip-ada
 
 wget https://civitai.com/api/download/models/130090 -O models/realisticVisionV51inpaint.safetensors;
 git clone https://github.com/continue-revolution/sd-webui-segment-anything extensions/sd-webui-segment-anything
+git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui-nsfw-censor extensions/stable-diffusion-webui-nsfw-censor
 
 wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth -O  /workspace/extensions/sd-webui-segment-anything/models/sam/sam_vit_h_4b8939.pth
 wget https://huggingface.co/ShilongLiu/GroundingDINO/resolve/main/groundingdino_swint_ogc.pth -O /workspace/extensions/sd-webui-segment-anything/models/grounding-dino/groundingdino_swint_ogc.pth
 
-git clone https://github.com/IDEA-Research/GroundingDINO.git
-cd GroundingDINO
-pip install -e .
+# git clone https://github.com/IDEA-Research/GroundingDINO.git
+# cd GroundingDINO
+# pip install -e .
+https://github.com/w-e-w/sd-webui-nudenet-nsfw-censor

@@ -17,8 +17,8 @@
 
 <script>
 	var apikey = 'UOM9JEA59ORKWATNUV7WBKZ6LVEXWITF3SLAMZA3'
-	var serverid = 'wjos52wb87zg5h'
-	var resizeTo = 0
+	var serverid = 'qcgxgvcdnisbtg'
+	var maxWidth = 1024
 
 	const resizeImage = async (
 	  url,
@@ -173,9 +173,9 @@
 		                "dino_enabled": true,
 		                "dino_model_name": "GroundingDINO_SwinT_OGC (694MB)",
 		                "dino_text_prompt": document.getElementById('mask_detect_prompt').value,
-		                "dino_box_threshold": 0.4,
+		                "dino_box_threshold": 0.3,
 		                "dino_preview_checkbox": false,
-		                "dino_preview_boxes_selection": []
+		                "dino_preview_boxes_selection": [2]
 		            },
 		            {
 		                "prompt": document.getElementById('prompt').value,
@@ -239,11 +239,11 @@
 		var file = document.querySelector('input[type="file"]').files[0];
 		getBase64(file).then(async (data) => {
 			let img;
-			if (resizeTo > 0) {
-				img = await resizeImage(data, {
-				  maxWidth: resizeTo
-				});
-			}
+			// if (resizeTo > 1024) {
+				// img = await resizeImage(data, {
+				//   maxWidth: maxWidth
+				// });
+			// }
 
 			dataToPost.input.payload[0].input_image = img?.b64 || data;
 			
